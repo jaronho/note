@@ -19,18 +19,24 @@ sudo ./VboxLinuxAdditions.run
 2. 配置共享文档夹
 
 重启完成后点击"设备(Devices)" -> 共享文档夹(Shared Folders)菜单，添加一个共享文档夹，
-选项固定和临时是指该文档夹是否是持久的。共享名能够任取一个自己喜欢的，比如"gongxiang"，尽量使用英文名称。
+选项固定和临时是指该文档夹是否是持久的。共享名能够任取一个自己喜欢的，比如"E_DRIVE"，"F_DRIVE"，尽量使用英文名称。
 
 3. 挂载共享文档夹
 
 重新进入虚拟Ubuntu，在命令行终端下输入：
 
-sudo mkdir /mnt/shared
+sudo mkdir /mnt/E_DRIVE
+sudo mkdir /mnt/F_DRIVE
 
-sudo mount -t vboxsf gongxiang /mnt/shared
+sudo mount -t vboxsf E_DRIVE /mnt/E_DRIVE
+sudo mount -t vboxsf F_DRIVE /mnt/F_DRIVE
 
-其中"gongxiang"是之前创建的共享文档夹的名字。OK，现在Ubuntu和主机能够互传文档了。
+其中"E_DRIVE"，"F_DRIVE"是之前创建的共享文档夹的名字。OK，现在Ubuntu和主机能够互传文档了。
 
-假如您不想每一次都手动挂载，在文件 /etc/rc.local 中（用root用户）追加如下命令 mount -t vboxsf share /home/liuqin/mnt
+假如您不想每一次都手动挂载，在文件 /etc/rc.local 中（用root用户）追加如下命令
+mount -t vboxsf E_DRIVE /mnt/E_DRIVE
+mount -t vboxsf F_DRIVE /mnt/F_DRIVE
 
-4. 卸载的话使用下面的命令： sudo umount -f /mnt/shared 注意： 共享文档夹的名称千万不要和挂载点的名称相同。
+4. 卸载的话使用下面的命令
+sudo umount -f /mnt/E_DRIVE
+sudo umount -f /mnt/F_DRIVE
