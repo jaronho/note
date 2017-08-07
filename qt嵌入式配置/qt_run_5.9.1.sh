@@ -5,7 +5,6 @@
 -release \
 -opensource \
 -no-accessibility
--make libs \
 -xplatform linux-arm-gnueabi-g++ \
 -optimized-qmake \
 -pch \
