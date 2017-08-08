@@ -13,7 +13,7 @@
 -I /opt/tslib-1.11/include \
 -L /opt/tslib-1.11/lib \
 -make libs \
--make examples \
+-nomake examples \
 -nomake tests \
 -qt-zlib \
 -no-opengl \
