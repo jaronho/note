@@ -13,8 +13,3 @@
 -confirm-license \
 -no-opengl \
 -qt-freetype
-
-#开发版配置:export QT_QPA_PLATFORM=linuxfb,否则会自动使用"EGLFS",出现:
-#This application failed to start because it could not find or load the Qt platform plugin "eglfs" in "".
-
-#开发版配置:export QT_QPA_FONTDIR=/usr/local/qt-5.9.1/lib/fonts

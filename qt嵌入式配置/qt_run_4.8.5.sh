@@ -57,6 +57,4 @@
 -DQT_QLOCALE_USES_FCVT \
 -I /opt/tslib-1.11/include \
 -L /opt/tslib-1.11/lib \
--importdir /opt/qt-4.8.5-arm/qml 
-
-
+-importdir /opt/qt-4.8.5-arm/qml
