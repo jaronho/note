@@ -1,31 +1,17 @@
 #!/bin/sh
 ./configure \
 -prefix /opt/qt-5.9.1-arm \
--verbose \
--no-feature-cursor \
--opensource \
--confirm-license \
--release \
--shared \
 -device linux-imx6-g++ \
 -device-option CROSS_COMPILE=/opt/poky/1.7/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi- \
 -sysroot /opt/poky/1.7/sysroots/cortexa9hf-vfp-neon-poky-linux-gnueabi \
--I /opt/tslib-1.11/include \
--L /opt/tslib-1.11/lib \
--make libs \
 -nomake examples \
 -nomake tests \
--qt-zlib \
--no-opengl \
--xcb-xlib \
--eglfs \
--linuxfb \
--qt-xcb \
--evdev \
--libinput \
--tslib \
--gif \
--ico \
--qt-libpng \
--qt-libjpeg \
--qt-sqlite
+-v \
+-no-feature-cursor \
+-release \
+-opensource \
+-confirm-license \
+-no-opengl
+
+#要在开发版配置:export QT_QPA_PLATFORM="linuxfb",否则会自动使用"EGLFS",出现:
+#This application failed to start because it could not find or load the Qt platform plugin "eglfs" in "".
