@@ -46,7 +46,7 @@
 		#把tslib/bin加入PATH
 		export PATH=$TSLIBDIR/bin:$PATH
 		
-		#把libts.so加入动态搜索路径
+		#把tslib/lib加入动态库搜索路径
 		export LD_LIBRARY_PATH=$TSLIBDIR/lib:$LD_LIBRARY_PATH
 	(5)添加使用tslib时的标准系统库(libdl)
 		find /home/tarena/workdir/toolchains/opt/S5PV210-crosstools/4.4.6/arm-concenwit-linux-gnueabi/lib/ \( -name "libdl-*"-o -name "libdl.so*"\) -exec cp -frd {}/opt/rootfs/lib/ \
