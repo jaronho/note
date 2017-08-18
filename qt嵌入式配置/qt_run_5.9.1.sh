@@ -1,15 +1,14 @@
 #!/bin/sh
-./configure \
--extprefix /opt/qt-5.9.1-arm \
--device linux-imx6-g++ \
--device-option CROSS_COMPILE=/opt/poky/1.7/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi- \
--sysroot /opt/poky/1.7/sysroots/cortexa9hf-vfp-neon-poky-linux-gnueabi \
--nomake examples \
--nomake tests \
--v \
--no-feature-cursor \
--release \
+./../qt-everywhere-opensource-src-5.9.1/configure \
+-verbose \
 -opensource \
+-release \
+-shared \
 -confirm-license \
--no-opengl \
--qt-freetype
+-no-feature-cursor \
+-make libs -make examples -make tools \
+-compile-examples \
+-xplatform linux-arm-gnueabi-g++ \
+-prefix /opt/qt-5.9.1-imx6 \
+-I/home/hezhanran/workspace/fsl-image-gui-imx6qsabresd/usr/include \
+-L/home/hezhanran/workspace/fsl-image-gui-imx6qsabresd/usr/lib
