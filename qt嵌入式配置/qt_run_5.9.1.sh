@@ -6,7 +6,7 @@
 -shared \
 -confirm-license \
 -no-feature-cursor \
--make libs -make examples -make tools \
+-make libs \
 -xplatform linux-arm-gnueabi-g++ \
 -prefix /opt/qt-5.9.1-imx6 \
 -I/home/hezhanran/workspace/fsl-image-gui-imx6qsabresd/usr/include \
