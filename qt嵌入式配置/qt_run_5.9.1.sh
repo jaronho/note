@@ -5,8 +5,16 @@
 -release \
 -shared \
 -confirm-license \
--no-feature-cursor \
+-egl \
+-eglfs \
+-linuxfb \
+-openvg \
 -make libs \
+-nomake tools \
+-nomake examples \
+-nomake tests \
+-no-feature-cursor \
+-no-qml-debug \
 -xplatform linux-arm-gnueabi-g++ \
 -prefix /opt/qt-5.9.1-imx6 \
 -I/home/hezhanran/workspace/fsl-image-gui-imx6qsabresd/usr/include \
