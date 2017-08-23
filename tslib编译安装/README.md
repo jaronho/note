@@ -1,18 +1,20 @@
-1.下载tslib源码,可以通过git clone https://github.com/kergoth/tslib
+1.需要先安装:sudo apt-get install autoconf automake
 
-2.使用"tslib交叉编译配置.sh"来配置
+2.下载tslib源码,可以通过git clone https://github.com/kergoth/tslib
 
-3.输入命令"make"编译
+3.使用"tslib交叉编译配置.sh"来配置
 
-4.输入命令"make install"进行安装
+4.输入命令"make"编译
 
-5.安装成功后,会在安装目录下生成四个目录
+5.输入命令"make install"进行安装
+
+6.安装成功后,会在安装目录下生成四个目录
 	(1)ect:用于配置tslib
 	(2)bin:tslib的测试程序,运行在ARM开发板
 	(3)lib:动态库,由于获取坐标等信息
 	(4)include:头文件,用于编译源码
 
-6.配置开发板
+7.配置开发板
 	(1)把安装后的tslib拷贝到目标板的指定目录,例如:/usr/local/
 	(2)修改tslib/etc/ts.conf文件
 		"# module_raw input"去除"#"改为"module_raw input"
