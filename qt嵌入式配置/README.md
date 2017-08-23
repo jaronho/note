@@ -14,11 +14,11 @@
 
 7.配置开发板
 	(1)把安装后的Qt的相关库拷贝到目标板指定目录,例如:
-		创建目录:/usr/local/qt-5.9.1-arm
+		创建目录:/usr/local/qt-5.9.1
 		拷贝文件夹:lib,plugins,qml 到所创建目录
 	
 	(2)配置/etc/profile
-		export QTDIR=/usr/local/qt-5.9.1-arm
+		export QTDIR=/usr/local/qt-5.9.1
 		
 		#
 		export QWS_MOUSE_PROTO="tslib:/dev/input/event0"
@@ -35,7 +35,7 @@
 		#
 		export QML2_IMPORT_PATH=$QTDIR/qml
 		
-		#把qt-5.9.1-arm/lib加入动态库搜索路径
+		#把qt-5.9.1/lib加入动态库搜索路径
 		export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
 		
 	
