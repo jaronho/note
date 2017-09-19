@@ -15,7 +15,7 @@
 	(4)include:头文件,用于编译源码
 
 7.配置开发板
-	(1)把安装后的tslib拷贝到目标板的指定目录,例如:/usr/local/
+	(1)把安装后的tslib拷贝到目标板的指定目录,例如:/opt/
 	(2)修改tslib/etc/ts.conf文件
 		"# module_raw input"去除"#"改为"module_raw input"
 	(3)连接触摸屏和开发板,获取触摸屏设备文件
@@ -25,29 +25,21 @@
 		如果没有,再次更换设备文件为event2,直到找到触摸屏的设备文件,
 		例如:hexdump/dev/input/event3,有打印信息,至此触摸屏的设备文件为/dev/input/event3
 	(4)配置/etc/profile
-		export TSLIBDIR=/usr/local/tslib
-		
+		export TSLIBDIR=/opt/tslib-1.11
 		#控制台设备文件名
 		export TSLIB_CONSOLEDEVICE=none
-		
 		#framebuffer的文件名
 		export TSLIB_FBDEVICE=/dev/fb0
-		
 		#触屏的文件名,取决于具体的设备驱动,根据步骤(3)找触摸屏的设备文件
 		export TSLIB_TSDEVICE=/dev/input/event0
-		
 		#触屏校正信息保存文件
 		export TSLIB_CALIBFILE=$TSLIBDIR/etc/pointercal
-		
 		#tslib配置文件
 		export TSLIB_CONFFILE=$TSLIBDIR/etc/ts.conf
-		
 		#tslib需要加载模块所在的目录
 		export TSLIB_PLUGINDIR=$TSLIBDIR/lib/ts
-		
 		#把tslib/bin加入PATH
 		export PATH=$TSLIBDIR/bin:$PATH
-		
 		#把tslib/lib加入动态库搜索路径
 		export LD_LIBRARY_PATH=$TSLIBDIR/lib:$LD_LIBRARY_PATH
 	(5)添加使用tslib时的标准系统库(libdl)
