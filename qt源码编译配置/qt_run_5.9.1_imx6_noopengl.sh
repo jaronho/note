@@ -17,7 +17,7 @@
 -no-opengl \
 -xplatform linux-arm-gnueabi-g++ \
 -prefix /opt/qt-5.9.1-imx6-noopengl \
--I/home/hezhanran/workspace/fsl-image-gui-imx6qsabresd/usr/include \
--L/home/hezhanran/workspace/fsl-image-gui-imx6qsabresd/usr/lib \
+-I/opt/fsl-image-gui-imx6qsabresd/usr/include \
+-L/opt/fsl-image-gui-imx6qsabresd/usr/lib \
 -I/opt/tslib/include \
 -L/opt/tslib/lib
