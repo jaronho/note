@@ -1,5 +1,5 @@
 #!/bin/sh
-./../qt-everywhere-opensource-src-5.9.1/configure \
+./../qt-everywhere-opensource-src-5.9.2/configure \
 -verbose \
 -opensource \
 -release \
@@ -13,4 +13,4 @@
 -no-qml-debug \
 -no-use-gold-linker \
 -no-iconv \
--prefix /opt/qt-5.9.1-desktop
+-prefix /opt/qt-5.9.2-desktop
