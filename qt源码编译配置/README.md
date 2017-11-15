@@ -17,24 +17,28 @@
 		创建目录:/opt/qt-5.9.2-imx6
 		拷贝文件夹:lib,plugins,qml 到所创建目录
 	
-	(2)配置/etc/profile
+	(2)配置/etc/profile,使用eglfs启动OpenGL功能
 		export QTDIR=/opt/qt-5.9.2-imx6
 		export QT_PLUGIN_PATH=$QTDIR/plugins
 		export QML_IMPORT_PATH=$QTDIR/qml
 		export QML2_IMPORT_PATH=$QTDIR/qml
 		export QT_QPA_FONTDIR=$QTDIR/lib/fonts
 		export QT_QPA_PLATFORM_PLUGIN_PATH=$QTDIR/plugins/platforms
-		export QT_QPA_PLATFORM=linuxfb
-		export QT_QPA_EGLFS_FB=/dev/fb0
+		export QT_QPA_PLATFORM=eglfs
+		export QT_QPA_EGLFS_INTEGRATION=eglfs_viv
 		export QT_QPA_EGLFS_FORCEVSYNC=1
-		export QT_QPA_EGLFS_WIDTH=1920
-		export QT_QPA_EGLFS_HEIGHT=1080
-		export QT_EGLFS_IMX6_NO_FB_MULTI_BUFFER=1
 		export FB_MULTI_BUFFER=2
-		export FB_FRAMEBUFFER_0=/dev/fb0
-		export DISPLAY=:0.0
 		export XDG_RUNTIME_DIR=/tmp
-		#把qt-5.9.2-imx6/lib加入动态库搜索路径
 		export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
 
+	(3)配置/etc/profile,使用linuxfb
+		export QTDIR=/opt/qt-5.9.2-imx6-noopengl
+		export QT_PLUGIN_PATH=$QTDIR/plugins
+		export QML_IMPORT_PATH=$QTDIR/qml
+		export QML2_IMPORT_PATH=$QTDIR/qml
+		export QT_QPA_FONTDIR=$QTDIR/lib/fonts
+		export QT_QPA_PLATFORM_PLUGIN_PATH=$QTDIR/plugins/platforms
+		export QT_QPA_PLATFORM=linuxfb
+		export XDG_RUNTIME_DIR=/tmp
+		export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
 	
