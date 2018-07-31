@@ -7,8 +7,8 @@
 安装【OpenGLUtility Toolkit】
     sudo apt-get install freeglut3-dev
 安装【其他开发包】
-sudo apt-get install libfreetype6-dev
-sudo apt-get install libglew-dev
-sudo apt-get install libglm-dev
-sudo apt-get install libsdl2-dev
-sudo apt-get install libsdl2-image-dev
+    sudo apt-get install libfreetype6-dev
+    sudo apt-get install libglew-dev
+    sudo apt-get install libglm-dev
+    sudo apt-get install libsdl2-dev
+    sudo apt-get install libsdl2-image-dev
