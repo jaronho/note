@@ -29,6 +29,7 @@ SOURCE_PATH	:= algorithm \
 			   inifile \
 			   logfile \
 			   probability \
+			   process \
 			   pugixml \
 			   shareprefs \
 			   xmlhelper
@@ -64,7 +65,7 @@ FLAGS := $(DEFINES) $(INCLUDES) $(CFLAGS) $(CXXFLAGS)
 LIB_FLAGS := $(LDFLAGS) $(LIBS) $(LIB_STATICS)
 
 #伪目标
-.PHONY: all gendir clean rebuild
+.PHONY: all gendir clean veryclean rebuild
 
 all: gendir $(TARGET)
 
@@ -90,10 +91,15 @@ $(TARGET): $(OBJECTS)
 	@$(COMPILE) $(FLAGS) -o $(BUILD_DIR)/$@ $(OBJECTS) $(LIB_FLAGS)
 	@echo "Build OK ..."
 
-#清除
+#只清除.o文件
 clean:
-	@rm -rf $(BUILD_DIR)
+	@rm -rf $(OBJ_C_DIR) $(OBJ_CXX_DIR)
 	@echo "Clean OK ..."
+
+#清除所有构建生成的文件
+veryclean:
+	@rm -rf $(BUILD_DIR)
+	@echo "Very Clean OK ..."
 
 #重新构建
 rebuild: clean all
