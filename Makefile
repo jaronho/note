@@ -17,8 +17,10 @@ searchFiles = $(foreach dir,$(1),$(wildcard $(dir)/*))
 ##################################################
 #目标文件名,例如:test
 TARGET      := test_cxx
-#宏定义,例如:-DEBUG -TEST=1
+#标识定义,例如:ARM x86
 DEFINES		:=
+#源码宏定义,例如:-DEBUG -TEST=1
+MACROS		:=
 #头文件路径,例如:-I/user/include
 INCLUDES	:= -I.
 #源文件路径
@@ -39,6 +41,11 @@ LDFLAGS     :=
 LIBS        :=
 #静态库文件,例如:libgendll.a
 LIB_STATICS	:= libevent/libevent.a libevent/libevent_core.a libevent/libevent_extra.a libevent/libevent_pthreads.a
+ifeq (ARM,$(filter ARM,$(DEFINES)))
+	LIB_STATICS += jpeg/lib/arm/libjpeg.a
+else
+	LIB_STATICS += jpeg/lib/x86/libjpeg.a
+endif
 #编译器
 COMPILE     := g++
 #C编译器选项
@@ -55,12 +62,14 @@ OBJ_CXX_DIR	?= $(BUILD_DIR)/object_cxx
 
 #源文件
 SOURCES := $(filter %.c %.cpp,$(call pwdFiles) $(call searchFiles,$(SOURCE_PATH)))
+#.d文件(依赖关系)
+DEPENDS_C := $(patsubst %.c,$(OBJ_C_DIR)/%.d,$(filter %.c,$(SOURCES)))
+DEPENDS_CXX := $(patsubst %.cpp,$(OBJ_CXX_DIR)/%.d,$(filter %.cpp,$(SOURCES)))
+DEPENDS := $(DEPENDS_C) $(DEPENDS_CXX)
 #.o文件
-OBJECTS_C := $(patsubst %.c,$(OBJ_C_DIR)/%.o,$(filter %.c,$(SOURCES)))
-OBJECTS_CXX := $(patsubst %.cpp,$(OBJ_CXX_DIR)/%.o,$(filter %.cpp,$(SOURCES)))
-OBJECTS := $(OBJECTS_C) $(OBJECTS_CXX)
+OBJECTS := $(DEPENDS:%.d=%.o)
 #编译参数
-FLAGS := $(DEFINES) $(INCLUDES) $(CFLAGS) $(CXXFLAGS)
+FLAGS := $(MACROS) $(INCLUDES) $(CFLAGS) $(CXXFLAGS)
 #链接库参数
 LIB_FLAGS := $(LDFLAGS) $(LIBS) $(LIB_STATICS)
 
@@ -74,22 +83,44 @@ gendir:
 	@mkdir -pv $(BUILD_DIR)
 	@mkdir -p $(OBJ_C_DIR) $(OBJ_CXX_DIR)
 
+#编译c源码的.d文件
+$(OBJ_C_DIR)/%.d: %.c
+	@mkdir -p $(@D)
+	@set -e; rm -f $@; \
+		$(COMPILE) -MM $(FLAGS) $< > $@.$$$$; \
+		sed 's,$(notdir $*)\.o[ :]*,$(OBJ_C_DIR)/$*\.o $@ : ,g' < $@.$$$$ > $@; \
+		rm -f $@.$$$$
+
+#编译c++源码点.d文件
+$(OBJ_CXX_DIR)/%.d: %.cpp
+	@mkdir -p $(@D)
+	@set -e; rm -f $@; \
+		$(COMPILE) -MM $(FLAGS) $< > $@.$$$$; \
+		sed 's,$(notdir $*)\.o[ :]*,$(OBJ_CXX_DIR)/$*\.o $@ : ,g' < $@.$$$$ > $@; \
+		rm -f $@.$$$$
+
+#编译.o文件描述
+o_describe:
+	@echo "========================== Generate .o File =========================="
+
 #编译c源码的.o文件
 $(OBJ_C_DIR)/%.o: %.c
-	@mkdir -p $(@D)
 	@echo $@
+	@mkdir -p $(@D)
 	@$(COMPILE) $(FLAGS) -c $< -o $@
 
 #编译c++源码点.o文件
 $(OBJ_CXX_DIR)/%.o: %.cpp
-	@mkdir -p $(@D)
 	@echo $@
+	@mkdir -p $(@D)
 	@$(COMPILE) $(FLAGS) -c $< -o $@
 
 #链接目标文件
-$(TARGET): $(OBJECTS)
+-include $(DEPENDS)
+$(TARGET): o_describe $(OBJECTS)
+	@echo "======================== Generate Target File ========================"
 	@$(COMPILE) $(FLAGS) -o $(BUILD_DIR)/$@ $(OBJECTS) $(LIB_FLAGS)
-	@echo "Build OK ..."
+	@echo 'Build "$(BUILD_DIR)/$@" OK ...'
 
 #只清除.o文件
 clean:
