@@ -47,7 +47,10 @@ else
 	LIB_STATICS += jpeg/lib/x86/libjpeg.a
 endif
 #编译器
-COMPILE     := g++
+COMPILE		:= g++
+ifeq (ARM,$(filter ARM,$(DEFINES)))
+	COMPILE := /opt/poky/1.7/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-g++ -march=armv7-a -mthumb-interwork -mfloat-abi=hard -mfpu=neon -mtune=cortex-a7
+endif
 #C编译器选项
 CFLAGS      := -g -Wall -O3
 #C++编译器选项
