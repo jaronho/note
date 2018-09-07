@@ -77,14 +77,9 @@ FLAGS := $(MACROS) $(INCLUDES) $(CFLAGS) $(CXXFLAGS)
 LIB_FLAGS := $(LDFLAGS) $(LIBS) $(LIB_STATICS)
 
 #伪目标
-.PHONY: all gendir clean veryclean rebuild
+.PHONY: all clean veryclean rebuild
 
-all: gendir $(TARGET)
-
-#自动创建目录
-gendir:
-	@mkdir -pv $(BUILD_DIR)
-	@mkdir -p $(OBJ_C_DIR) $(OBJ_CXX_DIR)
+all: $(TARGET)
 
 #编译c源码的.d文件
 $(OBJ_C_DIR)/%.d: %.c
