@@ -1,4 +1,4 @@
-1.进入qt源码目录,例如:qt-everywhere-opensource-src-5.9.2
+1.进入qt源码目录,例如:qt-everywhere-opensource-src-5.11.2
 
 2.修改文件(可选,需要tslib):qtbase/mkspecs/common/linux.conf
 	把"QMAKE_LIBS_THREAD = -lpthread"添加"-lts"改为"QMAKE_LIBS_THREAD = -lpthread -lts"
@@ -14,13 +14,12 @@
 
 7.配置开发板
 	(1)把安装后的Qt的相关库拷贝到目标板指定目录,例如:
-		创建目录:/opt/qt-5.9.2-imx6
+		创建目录:/opt/qt-5.11.2-imx6
 		拷贝文件夹:lib,plugins,qml 到所创建目录
 	
 	(2)配置/etc/profile,使用eglfs启动OpenGL功能
-		export QTDIR=/opt/qt-5.9.2-imx6
+		export QTDIR=/opt/qt-5.11.2-imx6
 		export QT_PLUGIN_PATH=$QTDIR/plugins
-		export QML_IMPORT_PATH=$QTDIR/qml
 		export QML2_IMPORT_PATH=$QTDIR/qml
 		export QT_QPA_FONTDIR=$QTDIR/lib/fonts
 		export QT_QPA_PLATFORM_PLUGIN_PATH=$QTDIR/plugins/platforms
@@ -32,9 +31,8 @@
 		export LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
 
 	(3)配置/etc/profile,使用linuxfb
-		export QTDIR=/opt/qt-5.9.2-imx6-noopengl
+		export QTDIR=/opt/qt-5.11.2-imx6-noopengl
 		export QT_PLUGIN_PATH=$QTDIR/plugins
-		export QML_IMPORT_PATH=$QTDIR/qml
 		export QML2_IMPORT_PATH=$QTDIR/qml
 		export QT_QPA_FONTDIR=$QTDIR/lib/fonts
 		export QT_QPA_PLATFORM_PLUGIN_PATH=$QTDIR/plugins/platforms
