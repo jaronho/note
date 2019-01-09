@@ -1,5 +1,5 @@
 #!/bin/sh
-./../qt-everywhere-opensource-src-5.9.2/configure \
+./../qt-everywhere-src-5.12.0/configure \
 -verbose \
 -opensource \
 -release \
@@ -18,7 +18,7 @@
 -no-use-gold-linker \
 -no-iconv \
 -xplatform linux-arm-gnueabi-g++ \
--prefix /opt/qt-5.9.2-imx6 \
+-prefix /opt/qt-5.12.0-imx6 \
 -I/opt/fsl-image-gui-imx6qsabresd/usr/include \
 -L/opt/fsl-image-gui-imx6qsabresd/usr/lib \
 -I/opt/tslib-1.11/include \
