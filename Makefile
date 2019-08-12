@@ -2,7 +2,7 @@
 ################ 可修改和配置参数 ################
 ##################################################
 #目标文件名,例如:test
-TARGET      := test_cxx
+TARGET      := test
 #标识定义,例如:ARM x86
 DEFINES		:=
 #源码宏定义,例如:-DEBUG -TEST=1
@@ -64,11 +64,12 @@ searchFiles = $(foreach dir,$(1),$(wildcard $(dir)/*))
 ############# 构建流程,基本不需再修改 ############
 ##################################################
 #源文件
-SOURCES := $(filter %.c %.cpp,$(call pwdFiles) $(call searchFiles,$(SOURCE_PATH)))
+SOURCES := $(filter %.c %.cpp %.hpp,$(call pwdFiles) $(call searchFiles,$(SOURCE_PATH)))
 #.d文件(依赖关系)
 DEPENDS_C := $(patsubst %.c,$(OBJ_C_DIR)/%.d,$(filter %.c,$(SOURCES)))
-DEPENDS_CXX := $(patsubst %.cpp,$(OBJ_CXX_DIR)/%.d,$(filter %.cpp,$(SOURCES)))
-DEPENDS := $(DEPENDS_C) $(DEPENDS_CXX)
+DEPENDS_CPP := $(patsubst %.cpp,$(OBJ_CXX_DIR)/%.d,$(filter %.cpp,$(SOURCES)))
+DEPENDS_HPP := $(patsubst %.hpp,$(OBJ_CXX_DIR)/%.d,$(filter %.hpp,$(SOURCES)))
+DEPENDS := $(DEPENDS_C) $(DEPENDS_CPP) $(DEPENDS_HPP)
 #.o文件
 OBJECTS := $(DEPENDS:%.d=%.o)
 #编译参数
@@ -91,6 +92,13 @@ $(OBJ_C_DIR)/%.d: %.c
 
 #编译c++源码点.d文件
 $(OBJ_CXX_DIR)/%.d: %.cpp
+	@mkdir -p $(@D)
+	@set -e; rm -f $@; \
+		$(COMPILE) -MM $(FLAGS) $< > $@.$$$$; \
+		sed 's,$(notdir $*)\.o[ :]*,$(OBJ_CXX_DIR)/$*\.o $@ : ,g' < $@.$$$$ > $@; \
+		rm -f $@.$$$$
+
+$(OBJ_CXX_DIR)/%.d: %.hpp
 	@mkdir -p $(@D)
 	@set -e; rm -f $@; \
 		$(COMPILE) -MM $(FLAGS) $< > $@.$$$$; \
