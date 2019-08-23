@@ -11,7 +11,7 @@
 TARGET      := test
 #标识定义,例如:ARM x86
 DEFINES		:=
-#源码宏定义,例如:-DEBUG -TEST=1
+#源码宏定义,例如:-D DEBUG -D TEST=1
 MACROS		:=
 #头文件路径,例如:-I/user/include
 INCLUDES	:= -I.
