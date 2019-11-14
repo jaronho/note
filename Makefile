@@ -15,6 +15,9 @@ DEFINES		:=
 MACROS		:=
 #头文件路径,例如:-I/user/include
 INCLUDES	:= -I.
+ifeq (ARM,$(filter ARM,$(DEFINES)))
+    INCLUDES := -I/opt/fsl-image-gui-imx6qsabresd/usr/include
+endif
 #源文件路径
 SOURCE_PATH	:= algorithm \
 			   common \
@@ -29,6 +32,9 @@ SOURCE_PATH	:= algorithm \
 			   xmlhelper
 #动态库路径,例如:-L/user/lib
 LDFLAGS     :=
+ifeq (ARM,$(filter ARM,$(DEFINES)))
+    LDFLAGS := -L/opt/fsl-image-gui-imx6qsabresd/usr/lib
+endif
 #动态库文件,例如:-lpthread
 LIBS        :=
 #静态库文件,例如:libgendll.a
